@@ -1,112 +1,150 @@
 update
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rizwan Ali Jeans | Shop</title>
-
-<style>
-body{font-family:Arial;margin:0;background:#f5f5f5;}
-header{background:#111;color:#fff;padding:20px;text-align:center;}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:20px;}
-.card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
-.card img{width:100%;height:300px;object-fit:cover;}
-.card-body{padding:15px;text-align:center;}
-.price{font-size:18px;font-weight:bold;}
-button{background:#25d366;color:white;border:none;padding:10px;width:100%;margin-top:10px;font-weight:bold;cursor:pointer;}
-button:hover{background:#1ebe5d;}
-
-.cart{
-    position:fixed;
-    right:20px;
-    top:20px;
-    background:white;
-    padding:15px;
-    width:250px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
-    border-radius:10px;
+<title>Rizwan Ali Jeans</title><style>
+:root {
+    --primary: #111;
+    --accent: #25d366;
+    --price: #e63946;
 }
 
-.cart h3{margin:0 0 10px;}
-.cart-items{font-size:14px;margin-bottom:10px;}
-.checkout{
-    background:#111;
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+}
+
+header {
+    background:var(--primary);
     color:white;
-    padding:10px;
     text-align:center;
+    padding:30px;
+}
+
+header h1 {margin:0;}
+
+.banner {
+    background:var(--price);
+    padding:8px;
+    font-weight:bold;
+}
+
+.container {
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.filters {
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.filters select {
+    padding:10px;
+}
+
+.products {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+}
+
+.card {
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card img {
+    width:100%;
+    height:320px;
+    object-fit:cover;
+}
+
+.content {
+    padding:15px;
+}
+
+.price {
+    color:var(--price);
+    font-size:22px;
+    font-weight:bold;
+}
+
+select {
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+button {
+    width:100%;
+    background:var(--accent);
+    border:none;
+    padding:12px;
+    color:white;
+    font-weight:bold;
     cursor:pointer;
 }
-</style>
-</head>
 
-<body>
+button:hover {opacity:0.9;}
 
-<header>
-    <h1>Rizwan Ali Jeans Store</h1>
-    <p>All Jeans 15€</p>
-</header>
+.footer {
+    text-align:center;
+    padding:30px;
+    color:#777;
+}
 
-<!-- CART -->
-<div class="cart">
-    <h3>🛒 Cart</h3>
-    <div class="cart-items" id="cartItems">Empty</div>
-    <div><b>Total: €<span id="total">0</span></b></div>
-    <div class="checkout" onclick="checkout()">Checkout WhatsApp</div>
+.search {
+    width:100%;
+    padding:10px;
+    margin-bottom:20px;
+}
+
+</style></head><body><header>
+<h1>RIZWAN ALI JEANS</h1>
+<div class="banner">TODO A 10€ • ENTREGA RÁPIDA</div>
+<p>Compra fácil por WhatsApp</p>
+</header><div class="container"><input type="text" class="search" placeholder="Buscar jeans..." onkeyup="searchProduct()"><div class="products" id="productList"><!-- PRODUCT --><div class="card">
+<img src="1000038356.jpg">
+<div class="content">
+<h3>Jeans Gris Slim</h3>
+<p class="price">10€</p>
+<select id="s1">
+<option>32</option>
+<option>34</option>
+<option>36</option>
+</select>
+<button onclick="buy('Jeans Gris', 's1')">Comprar</button>
 </div>
-
-<!-- PRODUCTS -->
-<div class="products">
-
-    <div class="card">
-        <img src="1000038360.jpg">
-        <div class="card-body">
-            <h3>Deep Blue</h3>
-            <div class="price">15€</div>
-            <button onclick="addToCart('Deep Blue')">Add to Cart</button>
-        </div>
-    </div>
-
-    <div class="card">
-        <img src="1000038362.jpg">
-        <div class="card-body">
-            <h3>Light Wash</h3>
-            <div class="price">15€</div>
-            <button onclick="addToCart('Light Wash')">Add to Cart</button>
-        </div>
-    </div>
-
-    <div class="card">
-        <img src="1000038356.jpg">
-        <div class="card-body">
-            <h3>Grey Jeans</h3>
-            <div class="price">15€</div>
-            <button onclick="addToCart('Grey Jeans')">Add to Cart</button>
-        </div>
-    </div>
-
+</div><div class="card">
+<img src="1000038357.jpg">
+<div class="content">
+<h3>Jeans Azul</h3>
+<p class="price">10€</p>
+<select id="s2">
+<option>32</option>
+<option>34</option>
+<option>36</option>
+</select>
+<button onclick="buy('Jeans Azul', 's2')">Comprar</button>
 </div>
-
-<script>
-let cart = [];
-let total = 0;
-
-function addToCart(product){
-    cart.push(product);
-    total += 15;
-    updateCart();
-}
-
-function updateCart(){
-    document.getElementById("cartItems").innerHTML = cart.join("<br>");
-    document.getElementById("total").innerText = total;
-}
-
-function checkout(){
-    let msg = "Hello, I want to order:%0A" + cart.join("%0A") + "%0ATotal: " + total + "€";
-    window.open("https://wa.me/34602097864?text=" + msg, "_blank");
-}
-</script>
-
-</body>
-</html>
+</div><div class="card">
+<img src="1000038364.jpg">
+<div class="content">
+<h3>Jeans Marino</h3>
+<p class="price">10€</p>
+<select id="s3">
+<option>32</option>
+<option>34</option>
+<option>36</option>
+</select>
+<button onclick="buy('Jeans Marino', 's3')">Comprar</button>
+</div>
+</div><div class="card">
+<img src="100
