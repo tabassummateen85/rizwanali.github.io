@@ -1,195 +1,330 @@
-update  
+update 
 
-
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rizwan Ali Jeans | WhatsApp Shop</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rizwan Ali Jeans | Premium Shop</title>
+  <style>
+    :root {
+      --primary: #000;
+      --accent: #25D366; /* WhatsApp Green */
+      --light: #f4f4f4;
+      --text: #333;
+    }
 
-<style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #f4f4f4;
-  }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #fff;
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
 
-  /* NAVBAR */
-  .navbar {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    background: #000;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-  }
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background: var(--primary);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-  /* HERO */
-  .hero {
-    height: 50vh;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                url('IMG-20260418-WA0001.jpg') center/cover no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-  }
+    .logo { font-size: 1.5rem; font-weight: bold; letter-spacing: 2px; }
 
-  /* PRODUCTS SECTION */
-  .products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 40px 10px;
-  }
+    .cart-icon {
+      cursor: pointer;
+      position: relative;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+    }
 
-  .card {
-    background: white;
-    width: 300px;
-    margin: 15px;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: 0.3s;
-  }
+    #cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: var(--accent);
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
 
-  .card:hover { transform: translateY(-5px); }
+    /* FILTER BAR */
+    .filter-section {
+      padding: 20px 5%;
+      background: var(--light);
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-  .card img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-    border-radius: 4px;
-  }
+    .filter-btn {
+      padding: 8px 20px;
+      border: 1px solid var(--primary);
+      background: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-  .card h3 { margin: 15px 0 5px; font-size: 20px; }
+    .filter-btn.active {
+      background: var(--primary);
+      color: white;
+    }
 
-  /* SIZE SELECT */
-  .size-select {
-    width: 100%;
-    padding: 10px;
-    margin: 15px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+    /* PRODUCT GRID */
+    .products-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 40px 5%;
+    }
 
-  /* WHATSAPP BUTTON */
-  .whatsapp-btn {
-    width: 100%;
-    padding: 12px;
-    background: #25D366;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+    .card {
+      border: 1px solid #eee;
+      padding: 15px;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
 
-  .whatsapp-btn:hover { background: #128C7E; }
+    .card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 
-  footer {
-    background: #000;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    margin-top: 50px;
-  }
+    .card img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
 
-  @media (max-width: 600px) {
-    .card { width: 90%; }
-  }
-</style>
+    .card h3 { margin: 5px 0; font-size: 1.1rem; }
+    .price { font-weight: bold; margin-bottom: 15px; display: block; }
+
+    .size-select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .add-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .add-btn:hover { background: #333; }
+
+    /* CART SIDEBAR (Real Cart Page simulation) */
+    .cart-sidebar {
+      position: fixed;
+      right: -100%;
+      top: 0;
+      width: 350px;
+      height: 100%;
+      background: white;
+      box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+      z-index: 2000;
+      transition: 0.4s;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-sidebar.active { right: 0; }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .cart-items { flex-grow: 1; overflow-y: auto; padding: 20px 0; }
+    
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #f9f9f9;
+      padding-bottom: 5px;
+    }
+
+    .whatsapp-order-btn {
+      background: var(--accent);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .close-cart { cursor: pointer; font-size: 1.5rem; }
+
+    footer { background: #000; color: #fff; text-align: center; padding: 40px; margin-top: 40px; }
+
+    @media (max-width: 480px) {
+      .cart-sidebar { width: 100%; }
+    }
+  </style>
 </head>
 <body>
 
-<header class="navbar">
-  <h1>Rizwan Ali Jeans</h1>
-</header>
+  <header class="navbar">
+    <div class="logo">RIZWAN ALI</div>
+    <button class="cart-icon" onclick="toggleCart()">
+      🛒 <span id="cart-count">0</span>
+    </button>
+  </header>
 
-<section class="hero">
-  <h2>Premium Collection 2026</h2>
-  <p>Select your size and order via WhatsApp</p>
-</section>
-
-<section class="products">
-
-  <div class="card">
-    <img src="IMG-20260418-WA0001.jpg" alt="Blue Denim">
-    <h3>Royal Blue Denim</h3>
-    <select class="size-select">
-      <option value="">Select Size</option>
-      <option value="32">32</option>
-      <option value="34">34</option>
-      <option value="36">36</option>
-    </select>
-    <button class="whatsapp-btn" onclick="orderNow(this)">Order on WhatsApp</button>
+  <div class="filter-section">
+    <button class="filter-btn active" onclick="filterProducts('all')">All Jeans</button>
+    <button class="filter-btn" onclick="filterProducts('Blue')">Blue</button>
+    <button class="filter-btn" onclick="filterProducts('Black')">Black</button>
   </div>
 
-  <div class="card">
-    <img src="IMG-20260418-WA0002.jpg" alt="Black Jeans">
-    <h3>Midnight Black</h3>
-    <select class="size-select">
-      <option value="">Select Size</option>
-      <option value="32">32</option>
-      <option value="34">34</option>
-      <option value="36">36</option>
-    </select>
-    <button class="whatsapp-btn" onclick="orderNow(this)">Order on WhatsApp</button>
+  <main class="products-container" id="product-grid">
+    </main>
+
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <span class="close-cart" onclick="toggleCart()">&times;</span>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <p>Your cart is empty.</p>
+    </div>
+    <div id="cart-footer" style="display:none;">
+      <a href="#" class="whatsapp-order-btn" onclick="sendWhatsAppOrder()">
+        Checkout via WhatsApp
+      </a>
+    </div>
   </div>
 
-  <div class="card">
-    <img src="IMG-20260418-WA0003.jpg" alt="Grey/Other Jeans">
-    <h3>Urban Grey</h3>
-    <select class="size-select">
-      <option value="">Select Size</option>
-      <option value="32">32</option>
-      <option value="34">34</option>
-      <option value="36">36</option>
-    </select>
-    <button class="whatsapp-btn" onclick="orderNow(this)">Order on WhatsApp</button>
-  </div>
+  <footer>
+    <p>© 2026 Rizwan Ali Jeans | +34 602 09 78 64</p>
+  </footer>
 
-</section>
+  <script>
+    // 1. PRODUCT DATABASE (JSON style)
+    const products = [
+      { id: 1, name: "Light Blue Denim", color: "Blue", price: "€45", img: "IMG-20260418-WA0001.jpg" },
+      { id: 2, name: "Dark Blue Denim", color: "Blue", price: "€45", img: "IMG-20260418-WA0002.jpg" },
+      { id: 3, name: "Classic Black", color: "Black", price: "€50", img: "IMG-20260418-WA0003.jpg" }
+    ];
 
-<footer>
-  <p>© 2026 Rizwan Ali Jeans | Quality You Can Trust</p>
-</footer>
+    let cart = JSON.parse(localStorage.getItem('rizwan_cart')) || [];
 
-<script>
-function orderNow(button) {
-  // --- CHANGE THIS TO YOUR NUMBER ---
-  const phoneNumber = "923000000000"; 
-  
-  const card = button.parentElement;
-  const productName = card.querySelector("h3").innerText;
-  const size = card.querySelector(".size-select").value;
+    // 2. RENDER PRODUCTS
+    function renderProducts(filter = 'all') {
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = '';
+      
+      const filtered = filter === 'all' ? products : products.filter(p => p.color === filter);
 
-  if (size === "") {
-    alert("Please select a size (32, 34, or 36) first!");
-    return;
-  }
+      filtered.forEach(p => {
+        grid.innerHTML += `
+          <div class="card">
+            <img src="${p.img}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <span class="price">${p.price}</span>
+            <select class="size-select" id="size-${p.id}">
+              <option value="">Select Size</option>
+              <option value="32">32</option>
+              <option value="34">34</option>
+              <option value="36">36</option>
+            </select>
+            <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+          </div>
+        `;
+      });
+    }
 
-  // Create the message text
-  const message = `Hello Rizwan Ali Jeans! I would like to order:%0A%0A*Product:* ${productName}%0A*Size:* ${size}`;
-  
-  // WhatsApp Link
-  const url = `https://wa.me/${phoneNumber}?text=${message}`;
+    // 3. CART LOGIC (Persistent)
+    function addToCart(id) {
+      const size = document.getElementById(`size-${id}`).value;
+      if (!size) {
+        alert("Please select a size!");
+        return;
+      }
+      const product = products.find(p => p.id === id);
+      cart.push({ ...product, selectedSize: size });
+      updateCart();
+      toggleCart(true); // Open cart when item added
+    }
 
-  // Open WhatsApp
-  window.open(url, '_blank');
-}
-</script>
+    function updateCart() {
+      localStorage.setItem('rizwan_cart', JSON.stringify(cart));
+      document.getElementById('cart-count').innerText = cart.length;
+      
+      const container = document.getElementById('cart-items');
+      const footer = document.getElementById('cart-footer');
+      
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Your cart is empty.</p>';
+        footer.style.display = 'none';
+      } else {
+        footer.style.display = 'block';
+        container.innerHTML = cart.map((item, index) => `
+          <div class="cart-item">
+            <span>${item.name} (Size: ${item.selectedSize})</span>
+            <button onclick="removeItem(${index})" style="border:none; background:none; cursor:pointer; color:red;">Remove</button>
+          </div>
+        `).join('');
+      }
+    }
 
+    function removeItem(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function toggleCart(show = null) {
+      const sidebar = document.getElementById('cart-sidebar');
+      if (show === true) sidebar.classList.add('active');
+      else if (show === false) sidebar.classList.remove('active');
+      else sidebar.classList.toggle('active');
+    }
+
+    // 4. FILTER LOGIC
+    function filterProducts(color) {
+      renderProducts(color);
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.includes(color) || (color === 'all' && btn.innerText === 'All Jeans'));
+      });
+    }
+
+    // 5. WHATSAPP CHECKOUT
+    function sendWhatsAppOrder() {
+      const phone = "34602097864";
+      let message = "Hello Rizwan Ali! I'd like to order:%0A%0A";
+      
+      cart.forEach((item, i) => {
+        message += `${i+1}. *${item.name}* - Size: ${item.selectedSize}%0A`;
+      });
+      
+      window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+    }
+
+    // Init
+    renderProducts();
+    updateCart();
+  </script>
 </body>
 </html>
-
-       
+      
