@@ -1,28 +1,29 @@
 update 
 
- <!DOCTYPE html>
+     <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rizwan Ali Jeans | Premium Shop</title>
+  <title>Rizwan Ali Jeans | Official Store</title>
   <style>
     :root {
       --primary: #000;
       --accent: #25D366; /* WhatsApp Green */
-      --light: #f4f4f4;
-      --text: #333;
+      --gray: #888;
+      --light-bg: #f9f9f9;
     }
 
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: 'Segoe UI', Roboto, sans-serif;
       background: #fff;
-      color: var(--text);
-      scroll-behavior: smooth;
+      color: #111;
+      overflow-x: hidden;
     }
 
-    /* NAVBAR */
+    /* NAVIGATION */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -35,151 +36,180 @@ update
       z-index: 1000;
     }
 
-    .logo { font-size: 1.5rem; font-weight: bold; letter-spacing: 2px; }
+    .logo { font-size: 1.4rem; font-weight: bold; letter-spacing: 2px; }
 
-    .cart-icon {
-      cursor: pointer;
-      position: relative;
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .cart-btn {
       background: none;
       border: none;
       color: white;
       font-size: 1.2rem;
+      cursor: pointer;
+      position: relative;
     }
 
     #cart-count {
       position: absolute;
-      top: -10px;
+      top: -8px;
       right: -10px;
       background: var(--accent);
-      border-radius: 50%;
+      color: white;
+      font-size: 10px;
       padding: 2px 6px;
-      font-size: 12px;
+      border-radius: 10px;
     }
 
-    /* FILTER BAR */
-    .filter-section {
-      padding: 20px 5%;
-      background: var(--light);
+    /* HERO SECTION (#home) */
+    .hero {
+      height: 60vh;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                  url('IMG-20260418-WA0001.jpg') center/cover no-repeat;
       display: flex;
-      gap: 15px;
+      flex-direction: column;
       justify-content: center;
-      flex-wrap: wrap;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero h1 { font-size: 3rem; margin: 0; }
+    .hero p { font-size: 1.2rem; margin-top: 10px; }
+
+    /* FILTERS */
+    .filter-bar {
+      padding: 30px 5% 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
     }
 
     .filter-btn {
       padding: 8px 20px;
-      border: 1px solid var(--primary);
+      border: 1px solid #ddd;
       background: white;
       cursor: pointer;
+      border-radius: 20px;
       transition: 0.3s;
     }
 
     .filter-btn.active {
       background: var(--primary);
       color: white;
+      border-color: var(--primary);
     }
 
-    /* PRODUCT GRID */
-    .products-container {
+    /* PRODUCT GRID (#products) */
+    .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 30px;
-      padding: 40px 5%;
+      padding: 20px 5% 60px;
     }
 
-    .card {
-      border: 1px solid #eee;
-      padding: 15px;
+    .product-card {
+      background: white;
       transition: 0.3s;
       display: flex;
       flex-direction: column;
     }
 
-    .card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-
-    .card img {
+    .product-card img {
       width: 100%;
-      height: 380px;
+      height: 400px;
       object-fit: cover;
-      margin-bottom: 15px;
+      background: #f4f4f4;
     }
 
-    .card h3 { margin: 5px 0; font-size: 1.1rem; }
-    .price { font-weight: bold; margin-bottom: 15px; display: block; }
+    .product-info { padding: 15px 0; }
+    .product-info h3 { margin: 0; font-size: 1.1rem; }
+    .product-color { color: var(--gray); font-size: 0.9rem; margin: 5px 0; }
+    .product-price { font-weight: bold; margin-bottom: 10px; display: block; }
 
     .size-select {
       width: 100%;
       padding: 10px;
       margin-bottom: 10px;
-      border: 1px solid #ddd;
+      border: 1px solid #ccc;
     }
 
-    .add-btn {
+    .add-to-cart-btn {
       width: 100%;
       padding: 12px;
       background: var(--primary);
       color: white;
       border: none;
-      cursor: pointer;
       font-weight: bold;
-      transition: 0.3s;
+      cursor: pointer;
     }
 
-    .add-btn:hover { background: #333; }
-
-    /* CART SIDEBAR (Real Cart Page simulation) */
+    /* CART SIDEBAR (#cart) */
     .cart-sidebar {
       position: fixed;
-      right: -100%;
       top: 0;
+      right: -100%;
       width: 350px;
       height: 100%;
       background: white;
       box-shadow: -5px 0 15px rgba(0,0,0,0.1);
       z-index: 2000;
-      transition: 0.4s;
-      padding: 20px;
+      transition: 0.4s ease;
+      padding: 25px;
       display: flex;
       flex-direction: column;
     }
 
-    .cart-sidebar.active { right: 0; }
+    .cart-sidebar.open { right: 0; }
 
     .cart-header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       border-bottom: 1px solid #eee;
-      padding-bottom: 10px;
+      padding-bottom: 15px;
     }
 
-    .cart-items { flex-grow: 1; overflow-y: auto; padding: 20px 0; }
-    
+    #cart-items-list {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 20px 0;
+    }
+
     .cart-item {
       display: flex;
       justify-content: space-between;
       margin-bottom: 15px;
-      font-size: 0.9rem;
+      padding-bottom: 10px;
       border-bottom: 1px solid #f9f9f9;
-      padding-bottom: 5px;
     }
 
-    .whatsapp-order-btn {
+    .whatsapp-checkout {
       background: var(--accent);
       color: white;
-      padding: 15px;
       text-align: center;
+      padding: 15px;
       text-decoration: none;
       font-weight: bold;
       border-radius: 4px;
-      margin-top: 10px;
+      display: block;
     }
 
-    .close-cart { cursor: pointer; font-size: 1.5rem; }
+    footer {
+      background: #000;
+      color: #666;
+      text-align: center;
+      padding: 40px;
+    }
 
-    footer { background: #000; color: #fff; text-align: center; padding: 40px; margin-top: 40px; }
-
-    @media (max-width: 480px) {
+    @media (max-width: 500px) {
       .cart-sidebar { width: 100%; }
+      .hero h1 { font-size: 2rem; }
     }
   </style>
 </head>
@@ -187,144 +217,171 @@ update
 
   <header class="navbar">
     <div class="logo">RIZWAN ALI</div>
-    <button class="cart-icon" onclick="toggleCart()">
-      🛒 <span id="cart-count">0</span>
-    </button>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#products">Shop</a>
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒 <span id="cart-count">0</span>
+      </button>
+    </nav>
   </header>
 
-  <div class="filter-section">
-    <button class="filter-btn active" onclick="filterProducts('all')">All Jeans</button>
-    <button class="filter-btn" onclick="filterProducts('Blue')">Blue</button>
-    <button class="filter-btn" onclick="filterProducts('Black')">Black</button>
-  </div>
+  <section id="home" class="hero">
+    <h1>Premium Denim</h1>
+    <p>Modern Fit. Professional Style.</p>
+  </section>
 
-  <main class="products-container" id="product-grid">
-    </main>
+  <section id="products">
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterItems('All')">All</button>
+      <button class="filter-btn" onclick="filterItems('Light Blue')">Light Blue</button>
+      <button class="filter-btn" onclick="filterItems('Dark Blue')">Dark Blue</button>
+      <button class="filter-btn" onclick="filterItems('Black')">Black</button>
+    </div>
 
-  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="products-grid" id="grid">
+      </div>
+  </section>
+
+  <div id="cart" class="cart-sidebar">
     <div class="cart-header">
       <h2>Your Cart</h2>
-      <span class="close-cart" onclick="toggleCart()">&times;</span>
+      <button onclick="toggleCart()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
     </div>
-    <div class="cart-items" id="cart-items">
-      <p>Your cart is empty.</p>
+    <div id="cart-items-list">
+      <p>Cart is empty</p>
     </div>
     <div id="cart-footer" style="display:none;">
-      <a href="#" class="whatsapp-order-btn" onclick="sendWhatsAppOrder()">
-        Checkout via WhatsApp
+      <a href="javascript:void(0)" class="whatsapp-checkout" onclick="checkout()">
+        Order on WhatsApp
       </a>
     </div>
   </div>
 
   <footer>
-    <p>© 2026 Rizwan Ali Jeans | +34 602 09 78 64</p>
+    <p>© 2026 Rizwan Ali Jeans | Spain: +34 602 09 78 64</p>
   </footer>
 
   <script>
-    // 1. PRODUCT DATABASE (JSON style)
-    const products = [
-      { id: 1, name: "Light Blue Denim", color: "Blue", price: "€45", img: "IMG-20260418-WA0001.jpg" },
-      { id: 2, name: "Dark Blue Denim", color: "Blue", price: "€45", img: "IMG-20260418-WA0002.jpg" },
-      { id: 3, name: "Classic Black", color: "Black", price: "€50", img: "IMG-20260418-WA0003.jpg" }
+    // 1. PRODUCT DATABASE (with Color included)
+    const productData = [
+      { id: 1, name: "Premium Slim Fit", color: "Light Blue", price: "45€", img: "IMG-20260418-WA0001.jpg" },
+      { id: 2, name: "Modern Tapered", color: "Dark Blue", price: "45€", img: "IMG-20260418-WA0002.jpg" },
+      { id: 3, name: "Street Classic", color: "Black", price: "50€", img: "IMG-20260418-WA0003.jpg" }
     ];
 
-    let cart = JSON.parse(localStorage.getItem('rizwan_cart')) || [];
+    let cart = JSON.parse(localStorage.getItem('denimCart')) || [];
 
     // 2. RENDER PRODUCTS
-    function renderProducts(filter = 'all') {
-      const grid = document.getElementById('product-grid');
+    function displayProducts(category = 'All') {
+      const grid = document.getElementById('grid');
       grid.innerHTML = '';
       
-      const filtered = filter === 'all' ? products : products.filter(p => p.color === filter);
+      const filtered = category === 'All' ? productData : productData.filter(p => p.color === category);
 
       filtered.forEach(p => {
         grid.innerHTML += `
-          <div class="card">
+          <div class="product-card">
             <img src="${p.img}" alt="${p.name}">
-            <h3>${p.name}</h3>
-            <span class="price">${p.price}</span>
-            <select class="size-select" id="size-${p.id}">
-              <option value="">Select Size</option>
-              <option value="32">32</option>
-              <option value="34">34</option>
-              <option value="36">36</option>
-            </select>
-            <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+            <div class="product-info">
+              <h3>${p.name}</h3>
+              <p class="product-color">${p.color}</p>
+              <span class="product-price">${p.price}</span>
+              <select class="size-select" id="size-${p.id}">
+                <option value="">Select Size</option>
+                <option value="32">32</option>
+                <option value="34">34</option>
+                <option value="36">36</option>
+              </select>
+              <button class="add-to-cart-btn" onclick="addToCart(${p.id})">ADD TO CART</button>
+            </div>
           </div>
         `;
       });
     }
 
-    // 3. CART LOGIC (Persistent)
-    function addToCart(id) {
-      const size = document.getElementById(`size-${id}`).value;
-      if (!size) {
-        alert("Please select a size!");
+    // 3. CART FUNCTIONS
+    function addToCart(productId) {
+      const sizeSelector = document.getElementById(`size-${productId}`);
+      const selectedSize = sizeSelector.value;
+
+      if (!selectedSize) {
+        alert("Please select a size first!");
         return;
       }
-      const product = products.find(p => p.id === id);
-      cart.push({ ...product, selectedSize: size });
-      updateCart();
-      toggleCart(true); // Open cart when item added
+
+      const product = productData.find(p => p.id === productId);
+      cart.push({ ...product, size: selectedSize });
+      
+      saveCart();
+      renderCart();
+      toggleCart(true);
     }
 
-    function updateCart() {
-      localStorage.setItem('rizwan_cart', JSON.stringify(cart));
-      document.getElementById('cart-count').innerText = cart.length;
-      
-      const container = document.getElementById('cart-items');
+    function renderCart() {
+      const list = document.getElementById('cart-items-list');
       const footer = document.getElementById('cart-footer');
-      
+      const countLabel = document.getElementById('cart-count');
+
+      countLabel.innerText = cart.length;
+
       if (cart.length === 0) {
-        container.innerHTML = '<p>Your cart is empty.</p>';
+        list.innerHTML = '<p>Cart is empty</p>';
         footer.style.display = 'none';
       } else {
         footer.style.display = 'block';
-        container.innerHTML = cart.map((item, index) => `
+        list.innerHTML = cart.map((item, index) => `
           <div class="cart-item">
-            <span>${item.name} (Size: ${item.selectedSize})</span>
-            <button onclick="removeItem(${index})" style="border:none; background:none; cursor:pointer; color:red;">Remove</button>
+            <div>
+              <strong>${item.name}</strong><br>
+              <small>Size: ${item.size} | ${item.color}</small>
+            </div>
+            <button onclick="remove(${index})" style="color:red; border:none; background:none; cursor:pointer;">Remove</button>
           </div>
         `).join('');
       }
     }
 
-    function removeItem(index) {
+    function remove(index) {
       cart.splice(index, 1);
-      updateCart();
+      saveCart();
+      renderCart();
     }
 
-    function toggleCart(show = null) {
-      const sidebar = document.getElementById('cart-sidebar');
-      if (show === true) sidebar.classList.add('active');
-      else if (show === false) sidebar.classList.remove('active');
-      else sidebar.classList.toggle('active');
+    function saveCart() {
+      localStorage.setItem('denimCart', JSON.stringify(cart));
     }
 
-    // 4. FILTER LOGIC
-    function filterProducts(color) {
-      renderProducts(color);
+    function toggleCart(forceOpen = false) {
+      const sidebar = document.getElementById('cart');
+      if (forceOpen) sidebar.classList.add('open');
+      else sidebar.classList.toggle('open');
+    }
+
+    function filterItems(color) {
+      displayProducts(color);
       document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.innerText.includes(color) || (color === 'all' && btn.innerText === 'All Jeans'));
+        btn.classList.toggle('active', btn.innerText === color);
       });
     }
 
-    // 5. WHATSAPP CHECKOUT
-    function sendWhatsAppOrder() {
+    // 4. WHATSAPP CHECKOUT
+    function checkout() {
       const phone = "34602097864";
-      let message = "Hello Rizwan Ali! I'd like to order:%0A%0A";
+      let text = "Hello Rizwan Ali Jeans! I want to order:%0A%0A";
       
       cart.forEach((item, i) => {
-        message += `${i+1}. *${item.name}* - Size: ${item.selectedSize}%0A`;
+        text += `${i+1}. *${item.name}* - Color: ${item.color} - Size: ${item.size}%0A`;
       });
-      
-      window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+
+      window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
     }
 
-    // Init
-    renderProducts();
-    updateCart();
+    // Initial Load
+    displayProducts();
+    renderCart();
+
   </script>
 </body>
 </html>
-      
+ 
