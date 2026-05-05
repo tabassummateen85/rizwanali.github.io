@@ -1,199 +1,63 @@
-update      
 
- <!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rizwan Ali Jeans | WhatsApp Shop</title>
-
+<title>Rizwan Ali Jeans | Ultra Edition</title>
 <style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #f9f9f9;
+  /* 1. THEME VARIABLES */
+  :root {
+    --bg: #f4f4f4;
+    --card-bg: #ffffff;
+    --text: #111111;
+    --navbar: #000000;
+    --primary: #25D366;
+    --border: #dddddd;
+    --shadow: rgba(0,0,0,0.1);
+  }
+
+  [data-theme="dark"] {
+    --bg: #121212;
+    --card-bg: #1e1e1e;
+    --text: #ffffff;
+    --navbar: #1a1a1a;
+    --border: #333333;
+    --shadow: rgba(0,0,0,0.5);
+  }
+
+  body { 
+    margin: 0; 
+    font-family: 'Segoe UI', sans-serif; 
+    background: var(--bg); 
+    color: var(--text); 
+    transition: background 0.3s, color 0.3s;
   }
 
   /* NAVBAR */
   .navbar {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    background: #000;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 3px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 5%; background: var(--navbar); color: white;
+    position: sticky; top: 0; z-index: 1000;
   }
 
-  /* HERO */
-  .hero {
-    height: 35vh;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                url('IMG-20260418-WA0012.jpg') center/cover no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-    padding: 20px;
+  .nav-controls { display: flex; align-items: center; gap: 20px; }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    cursor: pointer; background: #333; border: none; color: white;
+    padding: 5px 12px; border-radius: 15px; font-size: 14px;
   }
 
-  /* PRODUCTS SECTION */
-  .products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 40px 10px;
+  /* SEARCH & FILTERS */
+  .search-section {
+    background: var(--card-bg); padding: 20px; 
+    border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; gap: 15px;
   }
 
-  .card {
-    background: white;
-    width: 320px;
-    margin: 15px;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: 0.3s ease-in-out;
-  }
-
-  .card:hover { transform: translateY(-8px); }
-
-  .card img {
-    width: 100%;
-    height: 480px; /* Increased height for new image aspect ratio */
-    object-fit: cover;
-    border-radius: 4px;
-  }
-
-  .card h3 { margin: 15px 0 5px; font-size: 22px; color: #111; }
-
-  /* SIZE SELECT */
-  .size-select {
-    width: 100%;
-    padding: 12px;
-    margin: 15px 0;
-    border: 1px solid #333;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    background: #fff;
-  }
-
-  /* WHATSAPP BUTTON */
-  .whatsapp-btn {
-    width: 100%;
-    padding: 14px;
-    background: #25D366;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-    text-transform: uppercase;
-  }
-
-  .whatsapp-btn:hover { background: #128C7E; }
-
-  footer {
-    background: #000;
-    color: #fff;
-    text-align: center;
-    padding: 30px;
-    margin-top: 50px;
-  }
-
-  @media (max-width: 768px) {
-    .card { width: 45%; }
-  }
-  @media (max-width: 480px) {
-    .card { width: 95%; }
-  }
-</style>
-</head>
-<body>
-
-<header class="navbar">
-  <h1>Rizwan Ali Jeans</h1>
-</header>
-
-<section class="hero">
-  <h2>Street Style Collection</h2>
-  <p>Espagne Contact: +34 602 09 78 64</p>
-</section>
-
-<section class="products">
-
-  <div class="card">
-  <img src="IMG-20260418-WA0001.jpg" alt="Deep Blue Jeans"> 
-    <h3>Deep Indigo Blue</h3>
-    <select class="size-select">
-      <option value="">Select Size</option>
-      <option value="32">32</option>
-      <option value="34">34</option>
-      <option value="36">36</option>
-    </select>
-    <button class="whatsapp-btn" onclick="orderNow(this)">Order on WhatsApp</button>
-  </div>
-
-  <div class="card">
-  <img src="IMG-20260418-WA0002.jpg" alt="Classic Denim Jeans"> 
-    <h3>Royal Blue Denim</h3>
-    <select class="size-select">
-      <option value="">Select Size</option>
-      <option value="32">32</option>
-      <option value="34">34</option>
-      <option value="36">36</option>
-    </select>
-    <button class="whatsapp-btn" onclick="orderNow(this)">Order on WhatsApp</button>
-  </div>
-
-  <div class="card">
-    <img src="IMG-20260418-WA0003.jpg" alt="Light Sky Blue Jeans"> 
-    <h3>Urban Sky Blue</h3>
-    <select class="size-select">
-      <option value="">Select Size</option>
-      <option value="32">32</option>
-      <option value="34">34</option>
-      <option value="36">36</option>
-    </select>
-    <button class="whatsapp-btn" onclick="orderNow(this)">Order on WhatsApp</button>
-  </div>
-
-</section>
-
-<footer>
-  <p>© 2026 Rizwan Ali Jeans | Contact: +34 602 09 78 64</p>
-</footer>
-
-<script>
-function orderNow(button) {
-  // Provided number (+34 602 09 78 64)
-  const phoneNumber = "34602097864"; 
-  
-  const card = button.parentElement;
-  const productName = card.querySelector("h3").innerText;
-  const size = card.querySelector(".size-select").value;
-
-  if (size === "") {
-    alert("Please select your size (32, 34, or 36) before ordering.");
-    return;
-  }
-
-  // Create the message text for WhatsApp
-  const message = `Hello Rizwan Ali Jeans! I would like to place an order:%0A%0A*Item:* ${productName}%0A*Size:* ${size}`;
-  
-  // Create Link
-  const url = `https://wa.me/${phoneNumber}?text=${message}`;
-
-  // Redirect to WhatsApp
-  window.open(url, '_blank');
-}
-</script>
-
-</body>
-</html>
-                           
+  .search-input {
+    width: 80%; max-width: 400px; padding: 12px 20px;
+    border-radius: 25px; border: 1px solid var(--border);
+    background: var(--bg); color: var(--text); outline: none
+               
