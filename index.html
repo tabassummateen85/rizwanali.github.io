@@ -3,198 +3,274 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rizwan Ali Jeans | Ultra Edition</title>
+<title>Rizwan Ali Jeans | Ultra Edition V2</title>
 
 <style>
-:root{
-  --bg:#f4f4f4;
-  --card:#ffffff;
-  --text:#111;
-  --nav:#000;
-  --border:#ddd;
-  --shadow:rgba(0,0,0,0.1);
+:root {
+  --bg: #f4f4f4;
+  --card: #ffffff;
+  --text: #111;
+  --nav: #000;
+  --accent: #25D366;
+  --border: #ddd;
+  --shadow: rgba(0,0,0,0.1);
 }
 
-body{
-  margin:0;
-  font-family:Segoe UI,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+[data-theme="dark"] {
+  --bg: #121212;
+  --card: #1e1e1e;
+  --text: #f4f4f4;
+  --nav: #000;
+  --border: #333;
+  --shadow: rgba(0,0,0,0.5);
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.3s ease;
 }
 
 /* NAVBAR */
-.navbar{
-  background:var(--nav);
-  color:white;
-  padding:15px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:sticky;
-  top:0;
+.navbar {
+  background: var(--nav);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.logo{
-  font-size:22px;
-  font-weight:bold;
+.logo { font-size: 22px; font-weight: bold; }
+
+.nav-tools { display: flex; align-items: center; gap: 15px; }
+
+#theme-toggle {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 /* HERO */
-.hero{
-  text-align:center;
-  padding:40px 20px;
-  background:#111;
-  color:white;
-}
-
-.hero h1{
-  margin:0;
-  font-size:38px;
-}
-
-.hero p{
-  margin-top:10px;
-  color:#ccc;
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=1000&q=80');
+  background-size: cover;
+  background-position: center;
+  color: white;
 }
 
 /* SEARCH */
-.search-box{
-  padding:20px;
-  text-align:center;
-}
-
-.search-box input{
-  width:80%;
-  max-width:400px;
-  padding:12px;
-  border-radius:25px;
-  border:1px solid var(--border);
-  font-size:16px;
+.search-box { padding: 30px; text-align: center; }
+.search-box input {
+  width: 90%;
+  max-width: 500px;
+  padding: 15px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  outline: none;
+  box-shadow: 0 4px 6px var(--shadow);
 }
 
 /* PRODUCTS */
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  padding:20px;
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.card{
-  background:var(--card);
-  border-radius:15px;
-  overflow:hidden;
-  box-shadow:0 5px 15px var(--shadow);
-  transition:0.3s;
+.card {
+  background: var(--card);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px var(--shadow);
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
-.card:hover{
-  transform:translateY(-5px);
-}
+.card:hover { transform: translateY(-10px); }
 
-.card img{
-  width:100%;
-  height:320px;
-  object-fit:cover;
-}
+.card img { width: 100%; height: 350px; object-fit: cover; }
 
-.card-content{
-  padding:15px;
-}
+.card-content { padding: 20px; flex-grow: 1; }
 
-.card h3{
-  margin:0;
-}
+.price { color: var(--accent); font-size: 24px; font-weight: bold; margin: 10px 0; }
 
-.price{
-  color:#25D366;
-  font-size:20px;
-  font-weight:bold;
-  margin:10px 0;
+/* SIZE SELECTOR */
+.size-selector { margin: 15px 0; }
+.size-selector span { display: block; font-size: 12px; margin-bottom: 5px; opacity: 0.8; }
+.sizes { display: flex; gap: 8px; }
+.size-btn {
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--text);
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
 }
+.size-btn.active { background: var(--text); color: var(--bg); }
 
-.btn{
-  display:block;
-  text-align:center;
-  background:#25D366;
-  color:white;
-  text-decoration:none;
-  padding:12px;
-  border-radius:10px;
-  font-weight:bold;
+.btn {
+  display: block;
+  text-align: center;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.2s;
 }
+.btn:hover { opacity: 0.9; }
 
 /* FOOTER */
-.footer{
-  text-align:center;
-  padding:20px;
-  background:#000;
-  color:white;
-  margin-top:30px;
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  background: #000;
+  color: white;
+  margin-top: 50px;
 }
+.socials { margin-bottom: 15px; }
+.socials a { color: white; margin: 0 10px; text-decoration: none; font-size: 20px; }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">Rizwan Ali Jeans</div>
+  <div class="logo">RIZWAN ALI</div>
+  <div class="nav-tools">
+    <button id="theme-toggle">🌙 Mode</button>
+    <div id="cart-count">🛒 (0)</div>
+  </div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
-  <h1>Ultra Edition</h1>
-  <p>Premium Fashion Jeans Collection</p>
+  <h1>ULTRA EDITION 2026</h1>
+  <p>Premium Denim. Unmatched Quality.</p>
 </div>
 
-<!-- SEARCH -->
 <div class="search-box">
-  <input type="text" placeholder="Search Jeans...">
+  <input type="text" id="searchInput" placeholder="Search by name (e.g. Blue, Classic)..." onkeyup="filterProducts()">
 </div>
 
-<!-- PRODUCTS -->
-<div class="products">
+<div class="products" id="productGrid">
 
-  <div class="card">
-    <img src="IMG-20260418-WA0001.jpg" alt="Jeans">
+  <div class="card product-item">
+    <img src="IMG-20260418-WA0001.jpg" alt="Premium Blue Jeans">
     <div class="card-content">
-      <h3>Premium Blue Jeans</h3>
+      <h3 class="product-name">Premium Blue Jeans</h3>
       <div class="price">€45</div>
-      <a class="btn" href="https://wa.me/34602097864">
-        Order on WhatsApp
-      </a>
+      <div class="size-selector">
+        <span>SELECT SIZE:</span>
+        <div class="sizes">
+          <button class="size-btn" onclick="selectSize(this)">30</button>
+          <button class="size-btn" onclick="selectSize(this)">32</button>
+          <button class="size-btn" onclick="selectSize(this)">34</button>
+        </div>
+      </div>
+      <a class="btn" href="https://wa.me/34602097864" onclick="addToCart()">Order on WhatsApp</a>
     </div>
   </div>
 
-  <div class="card">
-    <img src="IMG-20260418-WA0002.jpg" alt="Jeans">
+  <div class="card product-item">
+    <img src="IMG-20260418-WA0002.jpg" alt="Ultra Black Jeans">
     <div class="card-content">
-      <h3>Ultra Black Jeans</h3>
+      <h3 class="product-name">Ultra Black Jeans</h3>
       <div class="price">€50</div>
-      <a class="btn" href="https://wa.me/34602097864">
-        Order on WhatsApp
-      </a>
+      <div class="size-selector">
+        <span>SELECT SIZE:</span>
+        <div class="sizes">
+          <button class="size-btn" onclick="selectSize(this)">30</button>
+          <button class="size-btn" onclick="selectSize(this)">32</button>
+          <button class="size-btn" onclick="selectSize(this)">34</button>
+        </div>
+      </div>
+      <a class="btn" href="https://wa.me/34602097864" onclick="addToCart()">Order on WhatsApp</a>
     </div>
   </div>
 
-  <div class="card">
-    <img src="IMG-20260418-WA0003.jpg" alt="Jeans">
+  <div class="card product-item">
+    <img src="IMG-20260418-WA0003.jpg" alt="Classic Fit Jeans">
     <div class="card-content">
-      <h3>Classic Fit Jeans</h3>
+      <h3 class="product-name">Classic Fit Jeans</h3>
       <div class="price">€40</div>
-      <a class="btn" href="https://wa.me/34602097864">
-        Order on WhatsApp
-      </a>
+      <div class="size-selector">
+        <span>SELECT SIZE:</span>
+        <div class="sizes">
+          <button class="size-btn" onclick="selectSize(this)">30</button>
+          <button class="size-btn" onclick="selectSize(this)">32</button>
+          <button class="size-btn" onclick="selectSize(this)">34</button>
+        </div>
+      </div>
+      <a class="btn" href="https://wa.me/34602097864" onclick="addToCart()">Order on WhatsApp</a>
     </div>
   </div>
 
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
+  <div class="socials">
+    <a href="#">FB</a> | <a href="#">IG</a> | <a href="#">TT</a>
+  </div>
   © 2026 Rizwan Ali Jeans | All Rights Reserved
 </div>
+
+<script>
+// DARK MODE LOGIC
+const themeToggle = document.getElementById('theme-toggle');
+themeToggle.addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', targetTheme);
+  themeToggle.innerText = targetTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+});
+
+// SEARCH FILTER LOGIC
+function filterProducts() {
+  let input = document.getElementById('searchInput').value.toLowerCase();
+  let items = document.getElementsByClassName('product-item');
+  
+  for (let i = 0; i < items.length; i++) {
+    let name = items[i].querySelector('.product-name').innerText.toLowerCase();
+    if (name.includes(input)) {
+      items[i].style.display = "";
+    } else {
+      items[i].style.display = "none";
+    }
+  }
+}
+
+// SIZE SELECTOR LOGIC
+function selectSize(btn) {
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// CART COUNTER LOGIC
+let count = 0;
+function addToCart() {
+  count++;
+  document.getElementById('cart-count').innerText = `🛒 (${count})`;
+}
+</script>
 
 </body>
 </html>
